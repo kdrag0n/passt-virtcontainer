@@ -1309,6 +1309,7 @@ void conf(struct ctx *c, int argc, char **argv)
 				usage(argv[0]);
 			}
 
+#undef stderr
 			if (c->stderr) {
 				err("Multiple --stderr options given");
 				usage(argv[0]);

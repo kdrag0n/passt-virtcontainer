@@ -243,6 +243,7 @@ int main(int argc, char **argv)
 	conf(&c, argc, argv);
 	trace_init(c.trace);
 
+#undef stderr
 	if (!c.debug && (c.stderr || isatty(fileno(stdout))))
 		__openlog(log_name, LOG_PERROR, LOG_DAEMON);
 
