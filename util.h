@@ -1,3 +1,5 @@
+#include <signal.h>
+#include <stdio.h>
 /* SPDX-License-Identifier: AGPL-3.0-or-later
  * Copyright (c) 2021 Red Hat GmbH
  * Author: Stefano Brivio <sbrivio@redhat.com>
@@ -5,6 +7,11 @@
 
 #ifndef UTIL_H
 #define UTIL_H
+
+#ifndef __bswap_constant_16
+#define __bswap_constant_16(x) \
+	((uint16_t)((((x) >> 8) & 0xffu) | (((x) & 0xffu) << 8)))
+#endif
 
 #define VERSION_BLOB							       \
 	VERSION "\n"							       \
