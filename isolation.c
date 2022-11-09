@@ -394,9 +394,4 @@ void isolate_postfork(const struct ctx *c)
 		prog.filter = filter_pasta;
 	}
 
-	if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) ||
-	    prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog)) {
-		perror("prctl");
-		exit(EXIT_FAILURE);
-	}
 }
