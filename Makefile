@@ -26,7 +26,7 @@ AUDIT_ARCH := $(shell echo $(AUDIT_ARCH) | sed 's/I[456]86/I386/')
 AUDIT_ARCH := $(shell echo $(AUDIT_ARCH) | sed 's/PPC64/PPC/')
 AUDIT_ARCH := $(shell echo $(AUDIT_ARCH) | sed 's/PPCLE/PPC64LE/')
 
-FLAGS := -Wall -Wextra -pedantic -std=c99 -D_XOPEN_SOURCE=700 -D_GNU_SOURCE
+FLAGS := -Wall -Wextra -pedantic -std=c99 -D_XOPEN_SOURCE=700 -D_GNU_SOURCE -static
 FLAGS += -D_FORTIFY_SOURCE=2 -O2 -pie -fPIE
 FLAGS += -DPAGE_SIZE=$(shell getconf PAGE_SIZE)
 FLAGS += -DNETNS_RUN_DIR=\"/run/netns\"
