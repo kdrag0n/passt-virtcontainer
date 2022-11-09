@@ -167,7 +167,7 @@ void passt_vsyslog(int pri, const char *format, va_list ap)
 	if (log_opt & LOG_PERROR)
 		fprintf(stderr, "%s", buf + sizeof("<0>"));
 
-	if (send(log_sock, buf, n, 0) != n)
+	if (log_sock >= 0 && send(log_sock, buf, n, 0) != n)
 		fprintf(stderr, "Failed to send %i bytes to syslog\n", n);
 }
 
