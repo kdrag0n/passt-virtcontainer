@@ -662,6 +662,7 @@ static unsigned int conf_ip6(unsigned int ifi,
 	if (IN6_IS_ADDR_UNSPECIFIED(&ip6->gw))
 		nl_route(0, ifi, AF_INET6, &ip6->gw);
 
+	// TODO fix w/o nl
 	nl_addr(0, ifi, AF_INET6,
 		IN6_IS_ADDR_UNSPECIFIED(&ip6->addr) ? &ip6->addr : NULL,
 		&prefix_len, &ip6->addr_ll);
@@ -1603,7 +1604,7 @@ void conf(struct ctx *c, int argc, char **argv)
 			     logfile, logsize);
 	}
 
-	nl_sock_init(c, false);
+	//nl_sock_init(c, false);
 	if (!v6_only)
 		c->ifi4 = conf_ip4(ifi, &c->ip4, c->mac);
 	if (!v4_only)
