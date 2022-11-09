@@ -871,9 +871,9 @@ static void conf_print(const struct ctx *c)
 	int i;
 
 	if (c->ifi4)
-		info("Outbound interface (IPv4): %s", if_indextoname(c->ifi4, ifn));
+		info("Outbound interface (IPv4): x");
 	if (c->ifi6)
-		info("Outbound interface (IPv6): %s", if_indextoname(c->ifi6, ifn));
+		info("Outbound interface (IPv6): x");
 	if (c->mode == MODE_PASTA)
 		info("Namespace interface: %s", c->pasta_ifn);
 
@@ -1484,11 +1484,7 @@ void conf(struct ctx *c, int argc, char **argv)
 				usage(argv[0]);
 			}
 
-			if (!(ifi = if_nametoindex(optarg))) {
-				err("Invalid interface name %s: %s", optarg,
-				    strerror(errno));
-				usage(argv[0]);
-			}
+			ifi = 1;
 			break;
 		case 'D':
 			if (!strcmp(optarg, "none")) {
@@ -1685,9 +1681,9 @@ void conf(struct ctx *c, int argc, char **argv)
 
 	if (!*c->pasta_ifn) {
 		if (c->ifi4)
-			if_indextoname(c->ifi4, c->pasta_ifn);
+			strcpy(c->pasta_ifn, "lo");
 		else
-			if_indextoname(c->ifi6, c->pasta_ifn);
+			strcpy(c->pasta_ifn, "lo");
 	}
 
 	if (c->mode == MODE_PASTA) {
