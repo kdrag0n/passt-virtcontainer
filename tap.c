@@ -980,7 +980,7 @@ static void tap_sock_unix_new(struct ctx *c)
 		return;
 	}
 
-	c->fd_tap = accept4(c->fd_tap_listen, NULL, NULL, 0);
+	c->fd_tap = accept4(c->fd_tap_listen, NULL, NULL, SOCK_CLOEXEC);
 
 	if (!getsockopt(c->fd_tap, SOL_SOCKET, SO_PEERCRED, &ucred, &len))
 		info("accepted connection from PID %i", ucred.pid);
